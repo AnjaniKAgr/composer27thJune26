@@ -733,7 +733,7 @@ class LinearWithWarmupScheduler(ComposerScheduler):
     Given :math:`\tau_w`, the fraction of post-warmup time elapsed (clipped to the interval :math:`[0, 1]`), as:
 
     .. math::
-        \tau_w = (t - t_{warmup}) / t_{max}
+        \tau_w = (t - t_{warmup}) / (t_{max} - t_{warmup})
 
     Where :math:`t_{warmup}` represents the warmup time, :math:`\alpha_i` represents the initial learning rate multiplier,
     and :math:`\alpha_f` represents the learning rate multiplier to decay to, and :math:`t_{max}` represents the duration
@@ -815,7 +815,7 @@ class CosineAnnealingWithWarmupScheduler(ComposerScheduler):
     Given :math:`\tau_w`, the fraction of post-warmup time elapsed (clipped to the interval :math:`[0, 1]`), as:
 
     .. math::
-       \tau_w = (t - t_{warmup}) / t_{max}
+       \tau_w = (t - t_{warmup}) / (t_{max} - t_{warmup})
 
     Where :math:`t_{warmup}` represents the warmup time, :math:`t_{max}` represents the duration of this scheduler, and
     :math:`\alpha_f` represents the learning rate multiplier to decay to.
@@ -889,7 +889,7 @@ class PolynomialWithWarmupScheduler(ComposerScheduler):
     Given :math:`\tau_w`, the fraction of post-warmup time elapsed (clipped to the interval :math:`[0, 1]`), as:
 
     .. math::
-       \tau_w = (t - t_{warmup}) / t_{max}
+       \tau_w = (t - t_{warmup}) / (t_{max} - t_{warmup})
 
     Where :math:`\kappa` represents the exponent to be used for the proportionality relationship,
     :math:`t_{warmup}` represents the warmup time, :math:`t_{max}` represents the duration of this scheduler, and
