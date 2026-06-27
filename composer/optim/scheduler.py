@@ -642,7 +642,7 @@ class MultiStepWithWarmupScheduler(ComposerScheduler):
 
     def __call__(self, state: State, ssr: float = 1.0):
         assert state.max_duration is not None, 'max_duration should be set whenever schedulers are invoked'
-        t_warmup = _convert_time(self.t_warmup, state)
+        t_warmup = _convert_time(self.t_warmup, state, ssr=ssr if self.scale_warmup else 1.0)
         if t_warmup.value == 0:
             warnings.warn(
                 textwrap.dedent(
@@ -770,7 +770,7 @@ class LinearWithWarmupScheduler(ComposerScheduler):
 
     def __call__(self, state: State, ssr: float = 1.0):
         assert state.max_duration is not None, 'max_duration should be set whenever schedulers are invoked'
-        t_warmup = _convert_time(self.t_warmup, state)
+        t_warmup = _convert_time(self.t_warmup, state, ssr=ssr if self.scale_warmup else 1.0)
         t_max = _convert_time(self.t_max, state, ssr=ssr)
         _raise_if_warmup_and_max_incompatible(t_warmup, t_max)
         _raise_if_max_duration_exceeds_t_max(t_max, state)
@@ -846,7 +846,7 @@ class CosineAnnealingWithWarmupScheduler(ComposerScheduler):
 
     def __call__(self, state: State, ssr: float = 1.0):
         assert state.max_duration is not None, 'max_duration should be set whenever schedulers are invoked'
-        t_warmup = _convert_time(self.t_warmup, state)
+        t_warmup = _convert_time(self.t_warmup, state, ssr=ssr if self.scale_warmup else 1.0)
         t_max = _convert_time(self.t_max, state, ssr=ssr)
         _raise_if_warmup_and_max_incompatible(t_warmup, t_max)
         _raise_if_max_duration_exceeds_t_max(t_max, state)
@@ -924,7 +924,7 @@ class PolynomialWithWarmupScheduler(ComposerScheduler):
 
     def __call__(self, state: State, ssr: float = 1.0):
         assert state.max_duration is not None, 'max_duration should be set whenever schedulers are invoked'
-        t_warmup = _convert_time(self.t_warmup, state)
+        t_warmup = _convert_time(self.t_warmup, state, ssr=ssr if self.scale_warmup else 1.0)
         t_max = _convert_time(self.t_max, state, ssr=ssr)
         _raise_if_warmup_and_max_incompatible(t_warmup, t_max)
         _raise_if_max_duration_exceeds_t_max(t_max, state)
